@@ -1,0 +1,13 @@
+#!/bin/bash -l
+
+set -e
+
+tags=$(/usr/local/bin/get-my-tags)
+eval "${tags}"
+
+
+if [ "${instance_tag_env}" == "prod" ] ; then
+    /usr/local/bin/enable-aws-cloudwatch-mon
+fi
+
+/usr/local/bin/enable-awslogs
