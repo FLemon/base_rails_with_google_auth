@@ -9,6 +9,8 @@
   </head>
 
   <body>
+    <%= render "layouts/messages" %>
+    <%= render "layouts/sessions" if user_signed_in? %>
     <%= yield %>
   </body>
 </html>

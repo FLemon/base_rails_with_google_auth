@@ -4,6 +4,8 @@ default: &default
 
 development:
   <<: *default
+  host: localhost
+  database: base_development
 
 test: &test
   <<: *default
