@@ -15,5 +15,9 @@ Bundler.require(*Rails.groups)
 
 module BaseAppRails
   class Application < Rails::Application
+    config.action_cable.url = "#{ENV['ACTION_CABLE_FRONTEND_HOST']}/cable"
+    origins = ENV['ACTION_CABLE_ALLOWED_REQUEST_ORIGINS'].split(',')
+    origins.map! { |url| /#{url}/ }
+    config.action_cable.allowed_request_origins = origins
   end
 end
