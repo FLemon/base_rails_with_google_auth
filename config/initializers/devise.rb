@@ -13,7 +13,8 @@ Devise.setup do |config|
   config.sign_out_via = :delete
 
   config.omniauth :google_oauth2, ENV['GOOGLE_APP_ID'], ENV['GOOGLE_APP_SECRET'], {
-    scope: "email",
-    hd: ENV['GOOGLE_APP_DOMAINS']&.split(' ')
+    scope: ENV.fetch("GOOGLE_APP_SCOPE"),
+    hd: ENV['GOOGLE_APP_DOMAINS']&.split(' '),
+    provider_ignores_state: true # this is bad, open up csrf attack
   }
 end

@@ -1,6 +1,15 @@
 <% if devise_mapping.omniauthable? %>
   <% resource_class.omniauth_providers.each do |provider| %>
-    <%= link_to "Sign in with #{mapped_omniauth(provider)}",
-      omniauth_authorize_path(resource_name, provider) %><br />
+    <%= link_to "Server side sign in with #{mapped_omniauth(provider)}",
+      omniauth_authorize_path(resource_name, provider)
+    %><br />
+    <%= link_to "Client side sign in with #{mapped_omniauth(provider)}", "",
+      class: "client-signin", remote: true, hidden: true,
+      data: {
+        google_app_id: ENV.fetch("GOOGLE_APP_ID"),
+        google_app_scope: ENV.fetch("GOOGLE_APP_SCOPE"),
+        google_app_callback: user_google_oauth2_omniauth_callback_path
+      }
+     %>
   <% end %>
 <% end %>
